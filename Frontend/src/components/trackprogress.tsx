@@ -10,7 +10,7 @@ interface Interval {
 
 const TrackProgress = () => {
   const { videoId } = useParams<{ videoId: string }>();
-  const [progress, setProgress] = useState<Progress | null>(null);
+  const [, setProgress] = useState<Progress | null>(null);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);

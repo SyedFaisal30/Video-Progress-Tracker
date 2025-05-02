@@ -7,3 +7,8 @@ export interface Progress {
   rewatched: boolean;
   lastWatchedPosition: number;
 }
+
+export interface Interval {
+  start: number;
+  end: number;
+}
