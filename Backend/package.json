@@ -4,20 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
-    "start": "ts-node src/index.ts"
+    "dev": "nodemon --exec tsx src/index.ts",
+    
+    "bundle": "node bundle.js",
+    "prestart": "npm install",
+    "start": "mv dist/server.js dist/server.cjs && node dist/server.cjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
+    "aws-sdk": "^2.1692.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
+    "esbuild": "^0.25.3",
     "express": "^5.1.0",
-    "mongoose": "^8.14.1"
+    "mock-aws-s3": "^4.0.2",
+    "mongoose": "^8.14.1",
+    "nock": "^14.0.4"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
