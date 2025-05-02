@@ -5,25 +5,19 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec tsx src/index.ts",
-    
-    "bundle": "node bundle.js",
-    "prestart": "npm install",
-    "start": "mv dist/server.js dist/server.cjs && node dist/server.cjs"
+    "build": "npx tsc",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
-    "aws-sdk": "^2.1692.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "esbuild": "^0.25.3",
     "express": "^5.1.0",
-    "mock-aws-s3": "^4.0.2",
-    "mongoose": "^8.14.1",
-    "nock": "^14.0.4"
+    "mongoose": "^8.14.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
