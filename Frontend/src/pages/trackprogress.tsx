@@ -53,14 +53,12 @@ const TrackProgress = () => {
     const duration = video.duration;
     videoDurationRef.current = duration;
 
-    // Start interval if not already started
     if (!currentIntervalRef.current) {
       currentIntervalRef.current = { start: current, end: current };
     } else {
       currentIntervalRef.current.end = current;
     }
 
-    // Calculate watched time from intervals
     const allIntervals = [...watchedIntervals];
     if (currentIntervalRef.current) {
       allIntervals.push(currentIntervalRef.current);
@@ -85,7 +83,7 @@ const TrackProgress = () => {
     const video = videoRef.current;
     if (!videoId || !video) return;
 
-    video.pause(); // pause on save
+    video.pause();
 
     if (currentIntervalRef.current) {
       setWatchedIntervals(prev => [...prev, currentIntervalRef.current!]);
@@ -130,9 +128,9 @@ const TrackProgress = () => {
   };
 
   return (
-    <div className="p-6 w-screen max-w-none bg-white rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold text-center mb-4">Track Video Progress</h2>
-      {error && <p className="text-red-500 text-center">{error}</p>}
+    <div className="p-6 w-screen max-w-none bg-zinc-900 text-white rounded-lg shadow-md min-h-screen">
+      <h2 className="text-2xl font-semibold text-center mb-6">🎥 Track Video Progress</h2>
+      {error && <p className="text-red-400 text-center mb-4">{error}</p>}
 
       {videoUrl ? (
         <video
@@ -140,26 +138,26 @@ const TrackProgress = () => {
           controls
           controlsList="nodownload noplaybackrate"
           disablePictureInPicture
-          className="w-full h-auto aspect-video mb-4 rounded"
+          className="w-full h-auto aspect-video mb-4 rounded-xl shadow-lg"
           src={videoUrl}
           onTimeUpdate={handleTimeUpdate}
           onSeeking={handleSeeking}
         />
       ) : (
-        <p>Loading video...</p>
+        <p className="text-gray-400">Loading video...</p>
       )}
 
-      <p className="text-gray-700 font-medium mb-4">Watched: {watchedPercentage}%</p>
+      <p className="text-gray-300 font-medium mb-4">👁️ Watched: {watchedPercentage}%</p>
 
       <div className="flex justify-between items-center">
         <button
           onClick={handleUpdateProgress}
-          className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition"
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition duration-300"
         >
           {isCompleted ? "Rewatch" : "Save Progress"}
         </button>
-        <span className="text-sm text-gray-500">
-          {isCompleted ? "Video Completed" : "Video In Progress"}
+        <span className="text-sm text-gray-400">
+          {isCompleted ? "✅ Video Completed" : "🕓 Video In Progress"}
         </span>
       </div>
     </div>
