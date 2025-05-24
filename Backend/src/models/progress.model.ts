@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface IProgress extends Document {
-  userId: string;
+  username: string;
   videoId: mongoose.Schema.Types.ObjectId;
   videoLength: number;
   watchedPercentage: number;
@@ -12,7 +12,7 @@ export interface IProgress extends Document {
 
 const ProgressSchema = new Schema<IProgress>(
   {
-    userId: { type: String, required: true },
+    username: { type: String, required: true },
     videoId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Video",

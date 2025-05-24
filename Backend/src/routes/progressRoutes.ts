@@ -1,9 +1,10 @@
 import express from 'express'
-import { saveProgress, getProgress } from '../controllers/progresstracker.controller'
+import { saveProgress } from '../controllers/saveprogress.controller'
+import { getUserVideoProgress } from '../controllers/getprogress.controller'
 
 const router = express.Router()
 
 router.post('/', saveProgress)
-router.get('/', getProgress)
+router.get("/:username/:videoId", getUserVideoProgress);
 
 export default router

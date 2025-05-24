@@ -6,6 +6,6 @@ const router = Router();
 
 router.get('/', getVideos);
 
-router.get('/:id', getSingleVideo);    // GET /api/videos/:id
+router.get('/:id', getSingleVideo);    
 
 export default router;

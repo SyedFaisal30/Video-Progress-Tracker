@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import progressRoutes from './routes/progressRoutes'
 import videoRoutes from './routes/video.route'
+import userRoutes from './routes/user.route'
 import cors from 'cors'
 
 
@@ -21,5 +22,7 @@ app.use(express.static("public"))
 app.use('/api/progress', progressRoutes)
 
 app.use('/api/videos', videoRoutes);
+
+app.use('/api/users', userRoutes);
 
 export  { app }
