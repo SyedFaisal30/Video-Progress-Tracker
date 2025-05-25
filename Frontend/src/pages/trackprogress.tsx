@@ -13,6 +13,7 @@ const TrackProgress = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [watchedPercentage, setWatchedPercentage] = useState<number>(0);
   const [isNewVideo, setIsNewVideo] = useState(false);
+  const [hasAutoSaved, setHasAutoSaved] = useState(false);
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
@@ -26,6 +27,7 @@ const TrackProgress = () => {
       try {
         console.log("[fetchVideoAndProgress] Fetching video metadata...");
         const videoRes = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/videos/${videoId}`);
+        if (!videoRes.ok) throw new Error("Failed to fetch video metadata");
         const videoJson = await videoRes.json();
         setVideoUrl(videoJson.data.videoUrl);
         console.log("[fetchVideoAndProgress] Video URL:", videoJson.data.videoUrl);
@@ -48,6 +50,7 @@ const TrackProgress = () => {
           setIsCompleted(false);
           setProgress(null);
         }
+        setHasAutoSaved(false); // Reset autosave when loading video
       } catch (err) {
         console.error("[fetchVideoAndProgress] Error loading video or progress:", err);
         setError("Failed to load video or progress.");
@@ -57,7 +60,7 @@ const TrackProgress = () => {
     if (videoId) fetchVideoAndProgress();
   }, [videoId]);
 
-  const handleTimeUpdate = () => {
+  const handleTimeUpdate = async () => {
     const video = videoRef.current;
     if (!video || !video.duration) return;
 
@@ -66,7 +69,33 @@ const TrackProgress = () => {
     const percent = Math.floor((current / duration) * 100);
 
     setWatchedPercentage(percent);
-    if (percent >= 98) setIsCompleted(true);
+
+    if (percent >= 98 && !isCompleted && !hasAutoSaved) {
+      setIsCompleted(true);
+      setHasAutoSaved(true);
+
+      try {
+        if (username && videoId) {
+          console.log("[handleTimeUpdate] Auto-saving progress as completed...");
+          const updated = await saveProgress(
+            username,
+            videoId,
+            current,
+            100,
+            true,
+            false
+          );
+          setProgress(updated);
+          setError(null);
+          setIsNewVideo(false);
+          console.log("[handleTimeUpdate] Auto-save successful");
+        }
+      } catch (err) {
+        console.error("[handleTimeUpdate] Auto-save failed:", err);
+        setError("Failed to auto-save completed progress.");
+        setHasAutoSaved(false); 
+      }
+    }
   };
 
   const handleUpdateProgress = async () => {
@@ -75,15 +104,6 @@ const TrackProgress = () => {
 
     video.pause();
     const lastPosition = video.currentTime;
-
-    console.log("[handleUpdateProgress] Saving progress with data:", {
-      username,
-      videoId,
-      lastPosition,
-      watchedPercentage,
-      isCompleted,
-      rewatched: false,
-    });
 
     try {
       const updated = await saveProgress(
@@ -94,12 +114,9 @@ const TrackProgress = () => {
         isCompleted,
         false
       );
-      console.log("[handleUpdateProgress] Progress saved successfully:", updated);
       setProgress(updated);
-      setIsCompleted(updated.completed);
-      setWatchedPercentage(updated.watchedPercentage);
       setError(null);
-      setIsNewVideo(false); // after save, no longer new video
+      setIsNewVideo(false);
     } catch (err) {
       console.error("[handleUpdateProgress] Failed to save progress:", err);
       setError("Failed to update progress.");
@@ -112,13 +129,14 @@ const TrackProgress = () => {
       videoRef.current.play();
       setWatchedPercentage(0);
       setIsCompleted(false);
+      setHasAutoSaved(false);
     }
   };
 
   return (
     <div className="p-6 w-screen max-w-none bg-zinc-900 text-white rounded-lg shadow-md min-h-screen">
       <h2 className="text-2xl font-semibold text-center mb-6">
-        🎥 Track Video Progress
+        🎥 Track Progress
       </h2>
 
       {error && <p className="text-red-400 text-center mb-4">{error}</p>}
