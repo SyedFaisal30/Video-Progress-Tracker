@@ -33,19 +33,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Progress = void 0;
+exports.User = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-const ProgressSchema = new mongoose_1.Schema({
-    username: { type: String, required: true },
-    videoId: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "Video",
-        required: true,
-    },
-    videoLength: { type: Number, required: true },
-    watchedPercentage: { type: Number, default: 0 },
-    completed: { type: Boolean, default: false },
-    rewatched: { type: Boolean, default: false },
-    lastWatchedPosition: { type: Number, default: 0 },
+const UserSchema = new mongoose_1.Schema({
+    username: { type: String, required: true, unique: true },
 }, { timestamps: true });
-exports.Progress = mongoose_1.default.model("Progress", ProgressSchema);
+exports.User = mongoose_1.default.model("User", UserSchema);
