@@ -21,14 +21,20 @@ interface ProgressData {
 const Videos = () => {
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [progressMap, setProgressMap] = useState<Record<string, ProgressData>>({});
-  const [username, setUsername] = useState<string | null>(localStorage.getItem("username"));
+  const [progressMap, setProgressMap] = useState<Record<string, ProgressData>>(
+    {}
+  );
+  const [username, setUsername] = useState<string | null>(
+    localStorage.getItem("username")
+  );
   const navigate = useNavigate();
 
   // Fetch all videos
   const fetchVideos = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/videos`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/api/videos`
+      );
       setVideos(response.data.data);
     } catch (error) {
       console.error("Error fetching videos:", error);
@@ -43,7 +49,11 @@ const Videos = () => {
       const responses = await Promise.all(
         videos.map((video) =>
           axios
-            .get(`${import.meta.env.VITE_SERVER_URL}/api/progress/${username}/${video._id}`)
+            .get(
+              `${import.meta.env.VITE_SERVER_URL}/api/progress/${username}/${
+                video._id
+              }`
+            )
             .then((res) => ({
               videoId: video._id,
               watchedPercentage: res.data.data?.watchedPercentage || 0,
@@ -135,14 +145,18 @@ const Videos = () => {
                 onClick={() => handleVideoClick(video._id)}
                 className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-red-500/20 transition duration-300 cursor-pointer group"
               >
-                <video
-                  className="h-48 object-cover group-hover:opacity-80 transition"
-                  src={video.videoUrl + "#t=0.1"}
-                  preload="metadata"
-                />
+                <div className="w-full h-48 overflow-hidden">
+                  <video
+                    className="w-full h-full object-cover group-hover:opacity-80 transition"
+                    src={video.videoUrl + "#t=0.1"}
+                    preload="metadata"
+                  />
+                </div>
 
                 <div className="p-4 space-y-2">
-                  <h3 className="text-lg font-semibold truncate">{video.title}</h3>
+                  <h3 className="text-lg font-semibold truncate">
+                    {video.title}
+                  </h3>
                   <p className="text-sm text-gray-400">
                     Duration: {convertToMinutes(video.videoLength)}
                   </p>
@@ -170,7 +184,9 @@ const Videos = () => {
                       </span>
                     )}
 
-                    <span className="text-sm text-gray-500">Click to track</span>
+                    <span className="text-sm text-gray-500">
+                      Click to track
+                    </span>
                   </div>
                 </div>
               </div>
