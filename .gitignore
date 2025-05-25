@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+
+# Node.js dependencies
+node_modules
+
+# Environment variables
+.env*
+
+>>>>>>> 981501737c9cadbf14831721f2a0d0c0d1c1627b
 # Logs
 logs
 *.log
@@ -7,10 +17,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+<<<<<<< HEAD
 node_modules
 
 
 *.loca
+=======
+# Build output
+*.local
+
+>>>>>>> 981501737c9cadbf14831721f2a0d0c0d1c1627b
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,5 +38,9 @@ node_modules
 *.sln
 *.sw?
 
+<<<<<<< HEAD
 
 .env*
+=======
+data
+>>>>>>> 981501737c9cadbf14831721f2a0d0c0d1c1627b
