@@ -133,7 +133,7 @@ const Videos = () => {
               <div
                 key={video._id}
                 onClick={() => handleVideoClick(video._id)}
-                className="w-full bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-red-500/20 transition duration-300 cursor-pointer group"
+                className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-red-500/20 transition duration-300 cursor-pointer group"
               >
                 <video
                   className="h-48 object-cover group-hover:opacity-80 transition"
