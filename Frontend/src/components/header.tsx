@@ -19,7 +19,7 @@ const Header = () => {
       setUsername(res.data.data.username);
       setModalOpen(false);
       toast.success(`Welcome, ${res.data.data.username}!`);
-      setTimeout(() => window.location.reload(), 1000); 
+      setTimeout(() => window.location.reload(), 1000);
     } catch (err: any) {
       if (err.response?.status === 409) {
         toast.error("Username already taken. Try a different one.");
@@ -42,7 +42,7 @@ const Header = () => {
     setUsername("");
     setDropdownOpen(false);
     toast.info("Logged out successfully.");
-    setTimeout(() => window.location.reload(), 1000); 
+    setTimeout(() => window.location.reload(), 1000);
   };
 
   useEffect(() => {
@@ -55,7 +55,9 @@ const Header = () => {
   return (
     <>
       <ToastContainer position="top-center" />
-      <header className="bg-black w-screen overflow-x-hidden text-white p-4 shadow-md">
+      
+      {/* Fixed Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white p-4 shadow-md">
         <div className="w-full mx-auto flex justify-between items-center px-4">
           <h1 className="text-3xl font-bold tracking-wide">🎬 VPT</h1>
 
@@ -81,7 +83,7 @@ const Header = () => {
               </button>
 
               {dropdownOpen && (
-                <div className="absolute w-40 bg-zinc-900 text-white rounded-lg shadow-lg z-50 p-2">
+                <div className="absolute right-0 mt-2 w-40 bg-zinc-900 text-white rounded-lg shadow-lg z-50 p-2">
                   <button
                     onClick={handleLogout}
                     className="w-full bg-red-600 hover:bg-red-700 text-white py-1 rounded text-sm mt-2"
@@ -97,7 +99,7 @@ const Header = () => {
 
       {/* Login Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-opacity-60 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center">
           <div className="bg-white rounded-lg p-6 w-96 shadow-lg text-black">
             <h2 className="text-lg font-semibold mb-4">Enter Your Username</h2>
             <input
@@ -110,7 +112,7 @@ const Header = () => {
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setModalOpen(false)}
-                className="px-4 py-1.5 bg-blue-600 text-red-700 rounded hover:bg-blue-700"
+                className="px-4 py-1.5 bg-blue-100 text-red-700 rounded hover:bg-blue-200"
               >
                 Cancel
               </button>
