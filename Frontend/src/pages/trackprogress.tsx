@@ -134,7 +134,7 @@ const TrackProgress = () => {
   };
 
   return (
-    <div className="p-6 w-screen max-w-none bg-zinc-900 text-white rounded-lg shadow-md min-h-screen">
+    <div className="p-6 mt-15 w-screen max-w-none bg-zinc-900 text-white rounded-lg shadow-md min-h-screen">
       <h2 className="text-2xl font-semibold text-center mb-6">
         🎥 Track Progress
       </h2>
