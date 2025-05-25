@@ -113,8 +113,8 @@ const Videos = () => {
   };
 
   return (
-    <div className="bg-gray-950 min-h-screen px-6 py-10 text-white">
-      <h1 className="text-4xl font-bold text-center text-red-500 mb-10">
+    <div className="bg-gray-950 min-h-screen px-6 py-10 text-white w-screen overflow-x-hidden">
+      <h1 className="text-4xl w-full font-bold text-center text-red-500 mb-10">
         🎥 Video Gallery
       </h1>
 
@@ -133,10 +133,10 @@ const Videos = () => {
               <div
                 key={video._id}
                 onClick={() => handleVideoClick(video._id)}
-                className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-red-500/20 transition duration-300 cursor-pointer group"
+                className="w-full bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-red-500/20 transition duration-300 cursor-pointer group"
               >
                 <video
-                  className="w-full h-48 object-cover group-hover:opacity-80 transition"
+                  className="h-48 object-cover group-hover:opacity-80 transition"
                   src={video.videoUrl + "#t=0.1"}
                   preload="metadata"
                 />

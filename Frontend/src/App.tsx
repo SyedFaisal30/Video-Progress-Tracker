@@ -10,7 +10,7 @@ const App = () => {
         <Header/>
         {/* Main Content */}
         <main>
-          <div className="max-w-7xl mx-auto">
+          <div className="w-screen overflow-x-hidden mx-auto">
             <Routes>
               <Route path="/" element={<Videos />} />
               <Route path="/track/:videoId" element={<TrackProgress />} />

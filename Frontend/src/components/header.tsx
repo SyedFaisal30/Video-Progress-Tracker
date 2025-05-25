@@ -55,8 +55,8 @@ const Header = () => {
   return (
     <>
       <ToastContainer position="top-center" />
-      <header className="bg-black text-white p-4 shadow-md">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4">
+      <header className="bg-black w-screen overflow-x-hidden text-white p-4 shadow-md">
+        <div className="w-full mx-auto flex justify-between items-center px-4">
           <h1 className="text-3xl font-bold tracking-wide">🎬 VPT</h1>
 
           {!username ? (
