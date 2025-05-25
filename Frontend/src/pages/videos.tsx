@@ -113,7 +113,7 @@ const Videos = () => {
   };
 
   return (
-    <div className="mt-10 bg-gray-950 min-h-screen px-6 py-10 text-white w-screen overflow-x-hidden">
+    <div className="mt-15 bg-gray-950 min-h-screen px-6 py-10 text-white w-screen overflow-x-hidden">
       <h1 className="text-4xl w-full font-bold text-center text-red-500 mb-10">
         🎥 Video Gallery
       </h1>
