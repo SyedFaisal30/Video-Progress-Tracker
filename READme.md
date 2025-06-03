@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🎥 Video Progress Tracker
 
 A React component that allows users to **watch a video**, track which parts they watched (with skip detection), and **save their progress** with intervals and last watched time.
